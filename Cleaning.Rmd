@@ -1,0 +1,29 @@
+---
+title: "Satisfaction In Using Meta Social Media Platform"
+output: html_document
+date: "2024-04-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+Response <- read.csv(file ="Satisfaction in Using Meta-Social Media Platforms - Form Responses 1.csv")
+Response
+
+ResponseDF <- (Response)
+ResponseDF
+
+#View(ResponseDF)
+#convertgendertonumeric <- as.numeric(ResponseDF$Gender)
+
+#mean(ResponseDF$Gender)
+```
+
+
+```{r}
+
+```
+
