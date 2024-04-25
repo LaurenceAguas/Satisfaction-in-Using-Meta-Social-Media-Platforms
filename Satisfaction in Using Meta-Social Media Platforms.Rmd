@@ -1,0 +1,625 @@
+---
+title: "Satisfaction In Using Meta Social Media Platform"
+output: html_document
+date: "2024-04-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Members: Aguas, Laurence
+#         Canonicato, Dianah Marie
+#         De Guzman, Arjay
+
+install.packages("readr")
+install.packages("dplyr")
+install.packages("ggplot2")
+```{r}
+library(readr)
+library(dplyr)
+survey_data <- read.csv("100 Responses.csv")
+
+# View the structure of the data frame
+str(survey_data)
+
+# Clean each column
+Survey <- survey_data
+
+# Replacing of empty Data to NA
+Survey[Survey == ""] <- NA
+Survey[Survey == "N/A"] <- NA
+
+
+#View(CleanSurvey)
+
+```
+
+```{r}
+#Plotting of Age and Gender and
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+#Plotting of Age
+AgePlot <- ggplot(Survey, aes(x = Age)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Age", x = "Age", y = "Frequency") +
+  theme_minimal()
+
+#Plotting of Gender
+GenderPlot <- ggplot(Survey, aes(x = Gender)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Gender", x = "Gender", y = "Frequency") +
+  theme_minimal()
+
+AgePlot
+GenderPlot
+
+
+```
+
+```{r}
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+#Plotting of Questions and being adjusted to be more readable since sometimes the questions are long characters.
+
+#if you are a student, please indicate your school.
+School <- (Survey$if.you.are.a.student..please.indicate.your.school..Leave.blank.if.you.are.not.a.student.)
+
+ggplot(Survey, aes(x = School)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "School",
+       x = "if you are a student, please indicate your school.",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16))    
+
+#What Meta Social Media platforms do you commonly use?
+Platform <- (Survey$What.Meta.Social.Media.platforms.do.you.commonly.use.)
+
+ggplot(Survey, aes(x = Platform)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Frequency of Social Media Usage",
+       x = "What Meta Social Media platforms do you commonly use?",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16))    
+
+#How much time do you spend on social media?
+TimeOnSocialMedia <- Survey$How.much.time.do.you.spend.on.social.media.
+
+ggplot(Survey, aes(x = TimeOnSocialMedia)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Time spent",
+       x = "How Often Do You Use Social Media Platforms?",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16))    
+
+#How often do you use Social Media Platforms?
+OftenUseOfPlatforms <- Survey$How.often.do.you.use.Social.Media.Platforms.
+
+ggplot(Survey, aes(x = OftenUseOfPlatforms)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Often Use Of Social Media Platform",
+       x = "How Often Do You Use Social Media Platforms?",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16))    
+
+#Please indicate the reasons for your use of social media by selecting all that apply from the following options:
+Reasons <- Survey$Please.indicate.the.reasons.for.your.use.of.social.media.by.selecting.all.that.apply.from.the.following.options.
+
+ggplot(Survey, aes(x = Reasons)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Reasons",
+       x = "Reasons For Your Use of Social Media",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16)) 
+
+#Do you find Meta Social Media Platforms  useful  in your everyday  life?
+DoYouFindSocialMediaPlatformUseful <- Survey$Do.you.find.Meta.Social.Media.Platforms..useful..in.your.everyday..life.
+
+ggplot(Survey, aes(x = DoYouFindSocialMediaPlatformUseful)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Is Meta Social Media Useful in Everyday Life?",
+       x = "Do you find Meta Social Media Platforms  useful  in your everyday  life",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16)) 
+
+# Count "Yes" votes
+YesCount <- sum(Survey$Do.you.find.Meta.Social.Media.Platforms..useful..in.your.everyday..life. == "Yes")
+
+# Count "No" votes
+NoCount <- sum(Survey$Do.you.find.Meta.Social.Media.Platforms..useful..in.your.everyday..life. == "No")
+
+print(YesCount)
+print(NoCount)
+
+#Does Social Media Platforms enables you to accomplish tasks more quickly?
+
+DoesSocialMediaPlatformsEnablesYoutoAccomplishTasksMoreQuickly <- Survey$Does.Social.Media.Platforms.enables.you.to.accomplish.tasks.more.quickly.
+ggplot(Survey, aes(x = DoesSocialMediaPlatformsEnablesYoutoAccomplishTasksMoreQuickly)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Does Social Media Platforms enables you to accomplish tasks more quickly?",
+       x = "
+",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16)) 
+
+#Does Meta Social Media Platforms  increase your productivity?
+Productivity <- Survey$Does.Meta.Social.Media.Platforms..increase.your.productivity.
+
+ggplot(Survey, aes(x = Productivity)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Does Meta Social Media Platforms  increase your productivity?",
+       x = "
+
+",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  
+        axis.text.y = element_text(size = 10),              
+        plot.title = element_text(size = 16)) 
+
+
+
+#Do you think using Meta Social Media Platforms is a good idea or a bad idea? Choose one.
+BadOrGoodWhenUsingMeta<- Survey$Do.you.think.using.Meta.Social.Media.Platforms.is.a.good.idea.or.a.bad.idea..Choose.one.
+
+ggplot(Survey, aes(x = BadOrGoodWhenUsingMeta)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you think using Meta Social Media Platforms is a good idea or a bad idea? Choose one.",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+#Do you like to use Meta Social Media Platforms? 
+LikingToUseSocialMedia<- Survey$Do.you.like.to.use.Meta.Social.Media.Platforms.
+
+ggplot(Survey, aes(x = LikingToUseSocialMedia)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you like to use Meta Social Media Platforms? ",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+
+#Do people who influence your behavior think that you should use Meta Social Media Platforms? Choose one.
+InfluenceBehavior<- Survey$Do.people.who.influence.your.behavior.think.that.you.should.use.Meta.Social.Media.Platforms..Choose.one.
+
+ggplot(Survey, aes(x = InfluenceBehavior)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do people who influence your behavior think that you should use Meta Social Media Platforms?",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+#Has the senior management of your academic or work organization been helpful in the use of Meta Social Media Platforms? Choose one.
+
+SeniorManagement<- Survey$Has.the.senior.management.of.your.academic.or.work.organization.been.helpful.in.the.use.of.Meta.Social.Media.Platforms..Choose.one.
+
+ggplot(Survey, aes(x = SeniorManagement)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Has the senior management of your academic or work organization been helpful in the use of Meta Social Media Platforms?") +
+  theme_minimal()
+
+
+#In general, does your academic or work organization support the use of Meta Social Media Platforms? Choose one.
+SupportOfUsingMeta<- Survey$In.general..does.your.academic.or.work.organization.support.the.use.of.Meta.Social.Media.Platforms..Choose.one.
+
+ggplot(Survey, aes(x = SupportOfUsingMeta)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "In general, does your academic or work organization support the use of Meta Social Media Platforms? ",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+#Do you have the necessary resources to use Meta Social Media Platforms? Choose one. 
+NecessaryResources<- Survey$Do.you.have.the.necessary.resources.to.use.Meta.Social.Media.Platforms..Choose.one.
+
+ggplot(Survey, aes(x = NecessaryResources)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "In general, does your academic or work organization support the use of Meta Social Media Platforms? ",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+#How often do you use the built-in help facility for assistance with Meta Social Media Platforms? Choose one.
+
+BuiltIn<- Survey$How.often.do.you.use.the.built.in.help.facility.for.assistance.with.Meta.Social.Media.Platforms..Choose.one.
+
+ggplot(Survey, aes(x = BuiltIn)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "How often do you use the built-in help facility for assistance",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+
+#Do you feel apprehensive/uneasy about using Meta Social Media Platforms? Choose one
+
+ApprehensiveOrUneasy<- Survey$Do.you.feel.apprehensive.uneasy.about.using.Meta.Social.Media.Platforms..Choose.one
+
+ggplot(Survey, aes(x = ApprehensiveOrUneasy)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you feel apprehensive/uneasy about using Meta Social Media Platforms?",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+
+#Do you intend to use Meta Social Media Platforms in the next [n] months? Choose one.
+MetaUsing<- Survey$Do.you.intend.to.use.Meta.Social.Media.Platforms.in.the.next..n..months..Choose.one.
+
+
+ggplot(Survey, aes(x = MetaUsing)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you intend to use Meta Social Media Platforms in the next [n] months?") +
+  theme_minimal()
+
+#Do you plan to use Meta Social Media Platforms in the next [n] months? Choose one.
+PlanOnUsing<- Survey$Do.you.plan.to.use.Meta.Social.Media.Platforms.in.the.next..n..months..Choose.one.
+
+
+ggplot(Survey, aes(x = PlanOnUsing)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you intend to use Meta Social Media Platforms in the next [n] months?") +
+  theme_minimal()
+
+
+```
+
+
+
+
+
+
+```{r}
+
+library(dplyr)
+#Barplot and Mean and Standard Deviation of every questions with number answers
+
+#If you use Meta Social Media Platforms, do you believe it will increase your chances of academic success or professional advancement? Please rate on a scale from 1 to 5.
+
+IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccess <- Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccess)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Frequency of Social Media Usage",
+       x = "If you use Meta Social Media Platforms, do you believe it will increase your chances of academic success or professional advancement? Please rate on a scale from 1 to 5.
+
+",
+       y = "Frequency") +
+  theme_minimal()
+
+
+IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccessMean <- Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5.
+
+# Calculate mean
+mean_value1 <- mean(Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value1 <- sd(Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value1))
+print(paste("Standard Deviation:", sd_value1))
+
+
+
+#How clear and understandable is your interaction with Meta Social Media Platforms? Rate on a scale from 1 to 5.
+HowClearAndUnderstandableInteraction <- Survey$How.clear.and.understandable.is.your.interaction.with.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = HowClearAndUnderstandableInteraction)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "How Clear And Understandable Interaction",
+       x = "If you use Meta Social Media Platforms, do you believe it will increase your chances of academic success or professional advancement? Please rate on a scale from 1 to 5.
+
+",
+       y = "Frequency") +
+  theme_minimal()
+
+HowClearAndUnderstandableInteractionMean <- mean(Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5.)
+
+print(HowClearAndUnderstandableInteractionMean)
+
+IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccessMean <- Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5.
+
+# Calculate mean
+mean_value2 <- mean(Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value2 <- sd(Survey$If.you.use.Meta.Social.Media.Platforms..do.you.believe.it.will.increase.your.chances.of.academic.success.or.professional.advancement..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value2))
+print(paste("Standard Deviation:", sd_value2))
+
+#Do you find it easy to become skillful in using Meta Social Media Platforms? Share your thoughts on a scale from 1 to 5.
+DoYouFindItEasyToBecomeSkillful <- Survey$Do.you.find.it.easy.to.become.skillful.in.using.Meta.Social.Media.Platforms..Share.your.thoughts.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = DoYouFindItEasyToBecomeSkillful)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Do you find it easy to become skillful in using Meta Social Media Platforms?",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value3 <- mean(Survey$Do.you.find.it.easy.to.become.skillful.in.using.Meta.Social.Media.Platforms..Share.your.thoughts.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value3 <- sd(Survey$Do.you.find.it.easy.to.become.skillful.in.using.Meta.Social.Media.Platforms..Share.your.thoughts.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value3))
+print(paste("Standard Deviation:", sd_value3))
+
+#Learning to operate Meta Social Media Platforms is easy for me. Please rate on a scale from 1 to 5.
+
+LearningToOperateMeta <-Survey$Learning.to.operate.Meta.Social.Media.Platforms.is.easy.for.me..Please.rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = LearningToOperateMeta)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "Learning to operate Meta Social Media Platforms is easy for me",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value4 <- mean(Survey$Learning.to.operate.Meta.Social.Media.Platforms.is.easy.for.me..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value4 <- sd(Survey$Learning.to.operate.Meta.Social.Media.Platforms.is.easy.for.me..Please.rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value4))
+print(paste("Standard Deviation:", sd_value4))
+
+#How does Meta Social Media Platforms impact your academic or work tasks? Rate on a scale from 1 to 5.
+
+HowMetaImpactsAcademic <-Survey$How.does.Meta.Social.Media.Platforms.impact.your.academic.or.work.tasks..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = HowMetaImpactsAcademic)) +geom_bar(fill = "violet", color = "black") +
+  labs(title = "Learning to operate Meta Social Media Platforms is easy for me",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value5 <- mean(Survey$How.does.Meta.Social.Media.Platforms.impact.your.academic.or.work.tasks..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value5 <- sd(Survey$How.does.Meta.Social.Media.Platforms.impact.your.academic.or.work.tasks..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value5))
+print(paste("Standard Deviation:", sd_value5))
+
+
+#Working with Meta Social Media Platforms is fun. Please share your opinion on a scale from 1 to 5.
+WorkingWithMetaPlatformIsFun <-Survey$Working.with.Meta.Social.Media.Platforms.is.fun..Please.share.your.opinion.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = WorkingWithMetaPlatformIsFun)) +geom_bar(fill = "violet", color = "black") +
+  labs(title = "Learning to operate Meta Social Media Platforms is easy for me",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value6 <- mean(Survey$Working.with.Meta.Social.Media.Platforms.is.fun..Please.share.your.opinion.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value6 <- sd(Survey$Working.with.Meta.Social.Media.Platforms.is.fun..Please.share.your.opinion.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value6))
+print(paste("Standard Deviation:", sd_value6))
+
+
+#How important is it to you that people you consider important think you should use Meta Social Media Platforms? Rate on a scale from 1 to 5.
+ImportantToTinkToUseMeta <-Survey$How.important.is.it.to.you.that.people.you.consider.important.think.you.should.use.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = ImportantToTinkToUseMeta)) +geom_bar(fill = "violet", color = "black") +
+  labs(title = "How important is it to you that people
+       consider important think you 
+       should use Meta",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value7 <- mean(Survey$How.important.is.it.to.you.that.people.you.consider.important.think.you.should.use.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value7 <- sd(Survey$How.important.is.it.to.you.that.people.you.consider.important.think.you.should.use.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value7))
+print(paste("Standard Deviation:", sd_value7))
+
+
+#How likely are you to call someone for help if you get stuck while using Meta Social Media Platforms? Rate on a scale from 1 to 5.
+
+CallSomeone <-Survey$How.likely.are.you.to.call.someone.for.help.if.you.get.stuck.while.using.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = CallSomeone)) +geom_bar(fill = "violet", color = "black") +
+  labs(title = "How likely to call for help",
+       x = "",y = "Frequency") +
+  theme_minimal()
+
+# Calculate mean
+mean_value8 <- mean(Survey$How.likely.are.you.to.call.someone.for.help.if.you.get.stuck.while.using.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value8 <- sd(Survey$How.likely.are.you.to.call.someone.for.help.if.you.get.stuck.while.using.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value8))
+print(paste("Standard Deviation:", sd_value8))
+
+#If you had a lot of time to complete a task using Meta Social Media Platforms, how confident are you in completing it? Rate on a scale from 1 to 5.
+
+ConfidentCompleting <-Survey$If.you.had.a.lot.of.time.to.complete.a.task.using.Meta.Social.Media.Platforms..how.confident.are.you.in.completing.it..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = ConfidentCompleting)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "How Confident Are You",
+       x = "", y = "Frequency") +
+  theme_minimal()
+
+
+# Calculate mean
+mean_value9<- mean(Survey$If.you.had.a.lot.of.time.to.complete.a.task.using.Meta.Social.Media.Platforms..how.confident.are.you.in.completing.it..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value9 <- sd(Survey$If.you.had.a.lot.of.time.to.complete.a.task.using.Meta.Social.Media.Platforms..how.confident.are.you.in.completing.it..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value9))
+print(paste("Standard Deviation:", sd_value9))
+
+
+#How concerned are you about losing information by hitting the wrong key on Meta Social Media Platforms? Rate on a scale from 1 to 5.
+
+LosingInformation <-Survey$How.concerned.are.you.about.losing.information.by.hitting.the.wrong.key.on.Meta.Social.Media.Platforms..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = LosingInformation)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "How concerned are you about losing information by hitting the wrong key",
+       x = "", y = "Frequency") +
+  theme_minimal()
+
+
+# Calculate mean
+mean_value10<- mean(Survey$If.you.had.a.lot.of.time.to.complete.a.task.using.Meta.Social.Media.Platforms..how.confident.are.you.in.completing.it..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value10 <- sd(Survey$If.you.had.a.lot.of.time.to.complete.a.task.using.Meta.Social.Media.Platforms..how.confident.are.you.in.completing.it..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value10))
+print(paste("Standard Deviation:", sd_value10))
+
+#How likely are you to use Meta Social Media Platforms in the next [n] months? Rate on a scale from 1 to 5.
+HowLikelyToUse <-Survey$How.likely.are.you.to.use.Meta.Social.Media.Platforms.in.the.next..n..months..Rate.on.a.scale.from.1.to.5.
+
+ggplot(Survey, aes(x = HowLikelyToUse)) +
+  geom_bar(fill = "violet", color = "black") +
+  labs(title = "How concerned are you about losing information by hitting the wrong key",
+       x = "", y = "Frequency") +
+  theme_minimal()
+
+
+# Calculate mean
+mean_value11<- mean(Survey$How.likely.are.you.to.use.Meta.Social.Media.Platforms.in.the.next..n..months..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Calculate standard deviation
+sd_value11 <- sd(Survey$How.likely.are.you.to.use.Meta.Social.Media.Platforms.in.the.next..n..months..Rate.on.a.scale.from.1.to.5., na.rm = TRUE)
+
+# Print the mean and standard deviation
+print(paste("Mean:", mean_value11))
+print(paste("Standard Deviation:", sd_value11))
+
+
+library(dplyr)
+
+# Calculate mean and standard deviation for each question
+SummaryStats <- Survey %>%
+  summarise(
+    Mean_Q1 = mean(IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccess, na.rm = TRUE),
+    SD_Q1 = sd(IfYouUseMetaSocialMediaPlatformsDoYouBelieveItWillIncreaseYourChancesOfAcademicSuccess, na.rm = TRUE),
+    Mean_Q2 = mean(HowClearAndUnderstandableInteraction, na.rm = TRUE),
+    SD_Q2 = sd(HowClearAndUnderstandableInteraction, na.rm = TRUE),
+    Mean_Q3 = mean(DoYouFindItEasyToBecomeSkillful, na.rm = TRUE),
+    SD_Q3 = sd(DoYouFindItEasyToBecomeSkillful, na.rm = TRUE),
+    Mean_Q4 = mean(LearningToOperateMeta, na.rm = TRUE),
+    SD_Q4 = sd(LearningToOperateMeta, na.rm = TRUE),
+    Mean_Q5 = mean(HowMetaImpactsAcademic, na.rm = TRUE),
+    SD_Q5 = sd(HowMetaImpactsAcademic, na.rm = TRUE),
+    Mean_Q6 = mean(WorkingWithMetaPlatformIsFun, na.rm = TRUE),
+    SD_Q6 = sd(WorkingWithMetaPlatformIsFun, na.rm = TRUE),
+    Mean_Q7 = mean(ImportantToTinkToUseMeta, na.rm = TRUE),
+    SD_Q7 = sd(ImportantToTinkToUseMeta, na.rm = TRUE),
+    Mean_Q8 = mean(CallSomeone, na.rm = TRUE),
+    SD_Q8 = sd(CallSomeone, na.rm = TRUE),
+    Mean_Q9 = mean(ConfidentCompleting, na.rm = TRUE),
+    SD_Q9 = sd(ConfidentCompleting, na.rm = TRUE),
+    Mean_Q10 = mean(LosingInformation, na.rm = TRUE),
+    SD_Q10 = sd(LosingInformation, na.rm = TRUE),
+    Mean_Q11 = mean(HowLikelyToUse, na.rm = TRUE),
+    SD_Q11 = sd(HowLikelyToUse, na.rm = TRUE)
+  )
+
+# Create a new dataframe with summary statistics
+Summary <- data.frame(Question = c("Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10", "Q11"),
+                         Mean = c(SummaryStats$Mean_Q1, SummaryStats$Mean_Q2, SummaryStats$Mean_Q3,
+                                  SummaryStats$Mean_Q4, SummaryStats$Mean_Q5, SummaryStats$Mean_Q6,
+                                  SummaryStats$Mean_Q7, SummaryStats$Mean_Q8, SummaryStats$Mean_Q9,
+                                  SummaryStats$Mean_Q10, SummaryStats$Mean_Q11),
+                         SD = c(SummaryStats$SD_Q1, SummaryStats$SD_Q2, SummaryStats$SD_Q3,
+                                SummaryStats$SD_Q4, SummaryStats$SD_Q5, SummaryStats$SD_Q6,
+                                SummaryStats$SD_Q7, SummaryStats$SD_Q8, SummaryStats$SD_Q9,
+                                SummaryStats$SD_Q10, SummaryStats$SD_Q11))
+
+# Print the summary dataframe
+print(Summary)
+
+
+```
+
+```{r}
+# Clean Age data
+Survey$Age <- as.numeric(gsub("[^0-9]", "", Survey$Age))
+Survey$Age[is.na(Survey$Age) | Survey$Age == ""] <- 0
+
+# Clean Gender data and convert to lowercase
+Survey$Gender <- tolower(trimws(Survey$Gender))
+Survey$Gender[is.na(Survey$Gender) | Survey$Gender == ""] <- "Unknown"
+Survey$Gender[Survey$Gender %in% c("m", "male")] <- "male"  
+Survey$Gender[Survey$Gender %in% c("f", "female")] <- "female"  
+
+# Selecting only Age and Gender columns
+Cleaned <- Survey[, c("Age", "Gender")]
+
+# Save cleaned dataframe to CSV
+write.csv(Cleaned, "Cleaned Demographics.csv", row.names = FALSE)
+
+
+
+```
+
+```{r}
+
+#Cleaned Info Demographics
+
+## Clean Timestamp data (assuming it's in a format that needs cleaning)
+Survey$Timestamp <- gsub("[^0-9:-]", "", Survey$Timestamp)  # Remove non-numeric characters except ":" and "-"
+Survey$Timestamp[is.na(Survey$Timestamp) | Survey$Timestamp == ""] <- "1970-01-01 00:00:00"
+
+# Clean Name data (if needed)
+Survey$Name <- trimws(tolower(Survey$Name))  # Convert to lowercase and trim whitespace
+
+# Clean Email Address data (if needed)
+Survey$Email.Address <- tolower(Survey$Email.Address)  # Convert email addresses to lowercase
+
+# Select the cleaned columns (Timestamp, Name, Email Address)
+cleaned_data <- Survey[, c("Timestamp", "Name", "Email.Address")]
+
+# Save cleaned dataframe to CSV
+write.csv(cleaned_data, "Cleaned Demographics2.csv", row.names = FALSE)
+
+
+
+```
+
